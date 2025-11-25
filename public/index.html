@@ -1,0 +1,23 @@
+<?php
+try {
+    $pdo = new PDO("mysql:host=db;dbname=schooldb;charset=utf8", "root", "root");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $pdo->query("SELECT id, name FROM users");
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    die("Database error: " . $e->getMessage());
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PHP + MySQL Test</title>
+</head>
+<body>
+    <h1>Users from Database</h1>
+
+    <pre><?php print_r($users); ?></pre>
+</body>
+</html>
